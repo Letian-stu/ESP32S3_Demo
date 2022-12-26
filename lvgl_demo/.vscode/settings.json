@@ -25,6 +25,8 @@
     "future": "c",
     "system_error": "c",
     "regex": "c",
-    "typeinfo": "c"
+    "typeinfo": "c",
+    "lv_log.h": "c",
+    "lv_color.h": "c"
   }
 }

@@ -2,7 +2,7 @@
  * @Author: StuTian
  * @Date: 2022-09-05 14:07
  * @LastEditors: letian
- * @LastEditTime: 2022-12-26 14:41
+ * @LastEditTime: 2022-12-26 18:23
  * @FilePath: \lvgl_demo\main\lvgl_task\include\gui_guider.h
  * @Description:
  * Copyright (c) 2022 by StuTian 1656733975@qq.com, All Rights Reserved.
@@ -17,11 +17,14 @@ typedef struct
 {
 	lv_group_t *group;
 	lv_obj_t *bg;
-	lv_obj_t *label;
-	lv_obj_t *btn1;
-	lv_obj_t *btn2;
-	lv_obj_t *btn3;
-	lv_obj_t *btn4;
+    lv_obj_t * sw;
+
+
+	// lv_obj_t *label;
+	// lv_obj_t *btn1;
+	// lv_obj_t *btn2;
+	// lv_obj_t *btn3;
+	// lv_obj_t *btn4;
 } lv_ui;
 
 extern lv_ui guider_ui;

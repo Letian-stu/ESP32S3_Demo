@@ -29,7 +29,7 @@ void KEY_Scan_thread_entry(void *pvParameters)
     while (1)
     {
         Button_Process();
-        vTaskDelay(30 / portTICK_PERIOD_MS);
+        vTaskDelay(20 / portTICK_PERIOD_MS);
     }
 }
 
