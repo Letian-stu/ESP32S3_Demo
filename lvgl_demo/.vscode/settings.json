@@ -5,5 +5,26 @@
     "interface/ftdi/esp32_devkitj_v1.cfg",
     "target/esp32s3.cfg"
   ],
-  "idf.portWin": "COM10"
+  "idf.portWin": "COM10",
+  "files.associations": {
+    "button.h": "c",
+    "lvgl_init.h": "c",
+    "gpio.h": "c",
+    "freertos.h": "c",
+    "*.inc": "c",
+    "gui_guider.h": "c",
+    "lv_port_indev.h": "c",
+    "lv_hal_disp.h": "c",
+    "esp_log.h": "c",
+    "lvgl.h": "c",
+    "semphr.h": "c",
+    "task.h": "c",
+    "stdio.h": "c",
+    "event_groups.h": "c",
+    "string.h": "c",
+    "future": "c",
+    "system_error": "c",
+    "regex": "c",
+    "typeinfo": "c"
+  }
 }
