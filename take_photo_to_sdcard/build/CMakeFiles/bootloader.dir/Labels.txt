@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+D:/Desktop/take_photo_to_sdcard/build/CMakeFiles/bootloader
+D:/Desktop/take_photo_to_sdcard/build/CMakeFiles/bootloader.rule
+D:/Desktop/take_photo_to_sdcard/build/CMakeFiles/bootloader-complete.rule
+D:/Desktop/take_photo_to_sdcard/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/Desktop/take_photo_to_sdcard/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/Desktop/take_photo_to_sdcard/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/Desktop/take_photo_to_sdcard/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/Desktop/take_photo_to_sdcard/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/Desktop/take_photo_to_sdcard/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/Desktop/take_photo_to_sdcard/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

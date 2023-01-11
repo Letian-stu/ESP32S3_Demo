@@ -27,9 +27,9 @@
 #include "esp_mn_models.h"
 #include "app_speech_if.h"
 
-#define BOARD_DMIC_I2S_SCK 18
-#define BOARD_DMIC_I2S_WS 17
-#define BOARD_DMIC_I2S_SDO 8
+#define BOARD_DMIC_I2S_SCK 16
+#define BOARD_DMIC_I2S_SDO 17
+#define BOARD_DMIC_I2S_WS 18
 
 static const esp_mn_iface_t *g_multinet = &MULTINET_MODEL;
 static model_iface_data_t *g_model_mn_data = NULL;
