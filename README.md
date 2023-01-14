@@ -5,5 +5,5 @@
 - http_cam
 - lvgl_demo 
 - speak_wakeup 
-- take_photo_to_sdcard
 - take_photo_show_lvgl
+- take_photo_to_sdcard

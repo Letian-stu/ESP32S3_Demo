@@ -93,10 +93,10 @@ void app_main()
         .ledc_timer = LEDC_TIMER_0,
         .ledc_channel = LEDC_CHANNEL_0,
 
-        .pixel_format = PIXFORMAT_JPEG, //YUV422,GRAYSCALE,RGB565,JPEG
-        .frame_size = FRAMESIZE_VGA, 
-        .jpeg_quality = 32, //0-63 lower number means higher quality
-        .fb_count = 2      //if more than one, i2s runs in continuous mode. Use only with JPEG
+        .pixel_format = PIXFORMAT_JPEG, // YUV422,GRAYSCALE,RGB565,JPEG
+        .frame_size = FRAMESIZE_VGA,
+        .jpeg_quality = 12, // 0-63 lower number means higher quality
+        .fb_count = 5   // if more than one, i2s runs in continuous mode. Use only with JPEG
     };
 
     err = esp_camera_init(&camera_config);
@@ -106,10 +106,8 @@ void app_main()
         return;
     }
     setvbuf(stdout, NULL, _IONBF, 0);
-    vTaskDelay(300);
+    vTaskDelay(100);
     initialise_wifi();
-
-    
 }
 
 static void initialise_wifi(void)
@@ -228,16 +226,11 @@ esp_err_t jpg_stream_httpd_handler(httpd_req_t *req)
         {
             break;
         }
-
         int64_t fr_end = esp_timer_get_time();
         int64_t frame_time = fr_end - last_frame;
         last_frame = fr_end;
         frame_time /= 1000;
-        printf("MJPG: %u KB %u ms (%.1ffps)\n",
-               (uint32_t)(_jpg_buf_len / 1024),
-               (uint32_t)(frame_time),
-               1000.0 / (uint32_t)(frame_time));
-
+        printf("MJPG: %u KB %u ms (%.1ffps)\n",(uint32_t)(_jpg_buf_len / 1024),(uint32_t)(frame_time),1000.0 / (uint32_t)(frame_time));
     }
     last_frame = 0;
     return res;
@@ -272,10 +265,5 @@ static void cam_task(void *pvParameters)
 {
     //Æô¶¯ Web ·þÎñ
     start_webserver();
-    while (1)
-    {
-        //printf("cam_task!\r\n");
-        vTaskDelay(5000);
-    }
+    vTaskDelete(NULL);
 }
-
