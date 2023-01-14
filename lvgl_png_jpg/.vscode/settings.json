@@ -1,0 +1,32 @@
+{
+  "C_Cpp.intelliSenseEngine": "Tag Parser",
+  "idf.adapterTargetName": "esp32s3",
+  "idf.portWin": "COM10",
+  "idf.openOcdConfigs": [
+    "interface/ftdi/esp32_devkitj_v1.cfg",
+    "target/esp32s3.cfg"
+  ],
+  "files.associations": {
+    "*.inc": "c",
+    "sstream": "c",
+    "regex": "c",
+    "*.ipp": "c",
+    "esp_camera.h": "c",
+    "array": "c",
+    "string": "c",
+    "string_view": "c",
+    "tjpgd.h": "c",
+    "esp_system.h": "c",
+    "unistd.h": "c",
+    "stat.h": "c",
+    "sd_card.h": "c",
+    "lv_fs_if.h": "c",
+    "memory": "c",
+    "lv_sjpg.h": "c",
+    "lv_png.h": "c",
+    "sdcard.h": "c",
+    "complex": "c",
+    "condition_variable": "c",
+    "future": "c"
+  }
+}

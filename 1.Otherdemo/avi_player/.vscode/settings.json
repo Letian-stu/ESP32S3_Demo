@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "app_main.h": "c",
+        "file_manager.h": "c",
+        "mjpeg.h": "c",
+        "xutility": "c"
+    }
+}
