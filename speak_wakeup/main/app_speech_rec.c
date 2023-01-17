@@ -117,7 +117,7 @@ void recsrcTask(void *arg)
             int s2 = ((buffer[x * 4 + 2] + buffer[x * 4 + 3]) << 3) & 0xFFFF0000;
             buffer[x] = s1 | s2;
         }
-#define CHANGE_WAKE
+// #define CHANGE_WAKE
 #ifdef CHANGE_WAKE
         if (enable_wn)
         {

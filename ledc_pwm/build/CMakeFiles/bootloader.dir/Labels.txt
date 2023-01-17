@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+D:/Desktop/ledc_fade/build/CMakeFiles/bootloader
+D:/Desktop/ledc_fade/build/CMakeFiles/bootloader.rule
+D:/Desktop/ledc_fade/build/CMakeFiles/bootloader-complete.rule
+D:/Desktop/ledc_fade/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/Desktop/ledc_fade/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/Desktop/ledc_fade/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/Desktop/ledc_fade/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/Desktop/ledc_fade/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/Desktop/ledc_fade/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/Desktop/ledc_fade/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
