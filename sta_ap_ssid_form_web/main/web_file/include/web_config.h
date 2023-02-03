@@ -44,9 +44,8 @@ typedef struct {
 
 extern nvs_handle_t nvs_wifi_config;
 extern recv_wifi_buf_t recv_wifi_buf;
-
-extern nvs_handle_t wifi_config;
 extern httpd_handle_t server;
+
 esp_err_t start_wifi_config_server(const char *base_path);
 
 #endif

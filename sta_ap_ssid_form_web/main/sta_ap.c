@@ -203,7 +203,7 @@ esp_err_t mount_storage(const char* base_path)
     ESP_LOGI(TAG, "Partition size: total: %d, used: %d", total, used);
     return ESP_OK;
 }
-
+    
 void app_main(void)
 {
     ESP_ERROR_CHECK(nvs_flash_init());
