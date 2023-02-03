@@ -1,0 +1,23 @@
+{
+  "C_Cpp.intelliSenseEngine": "Tag Parser",
+  "idf.adapterTargetName": "esp32s3",
+  "idf.openOcdConfigs": [
+    "interface/ftdi/esp32_devkitj_v1.cfg",
+    "target/esp32s3.cfg"
+  ],
+  "files.associations": {
+    "task.h": "c",
+    "esp_netif.h": "c",
+    "*.inc": "c",
+    "bitset": "c",
+    "chrono": "c",
+    "algorithm": "c",
+    "complex": "c",
+    "esp_wifi.h": "c",
+    "web_config.h": "c",
+    "typeinfo": "c",
+    "esp_http_server.h": "c",
+    "nvs_flash.h": "c"
+  },
+  "idf.portWin": "COM3"
+}

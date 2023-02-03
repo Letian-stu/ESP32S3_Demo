@@ -1,0 +1,18 @@
+{
+  "C_Cpp.intelliSenseEngine": "Tag Parser",
+  "idf.adapterTargetName": "esp32s3",
+  "idf.openOcdConfigs": [
+    "interface/ftdi/esp32_devkitj_v1.cfg",
+    "target/esp32s3.cfg"
+  ],
+  "files.associations": {
+    "task.h": "c",
+    "esp_netif.h": "c",
+    "*.inc": "c",
+    "bitset": "c",
+    "chrono": "c",
+    "algorithm": "c",
+    "complex": "c"
+  },
+  "idf.portWin": "COM3"
+}

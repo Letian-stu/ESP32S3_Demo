@@ -2,8 +2,8 @@
  * @Author: letian
  * @Date: 2023-01-13 15:57
  * @LastEditors: letian
- * @LastEditTime: 2023-01-14 20:20
- * @FilePath: \take_photo_to_lvgl\main\main.c
+ * @LastEditTime: 2023-01-29 14:26
+ * @FilePath: \take_photo_show_lvgl_2\main\main.c
  * @Description:
  * Copyright (c) 2023 by letian 1656733975@qq.com, All Rights Reserved.
  */
