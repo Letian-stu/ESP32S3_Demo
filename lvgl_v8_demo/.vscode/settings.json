@@ -1,0 +1,8 @@
+{
+    "idf.adapterTargetName": "esp32s3",
+    "idf.port": "/dev/ttyUSB0",
+    "files.associations": {
+        "lv_demo_benchmark.h": "c",
+        "lvgl_helpers.h": "c"
+    }
+}
