@@ -77,6 +77,7 @@ int app_main(void)
         ESP_LOGE(TAG, "Camera Init Failed");
         return ESP_FAIL;
     }
+    
     // initialize the sdcard
     esp_err_t ret;
     esp_vfs_fat_sdmmc_mount_config_t mount_config = {
@@ -113,6 +114,9 @@ int app_main(void)
     }
     ESP_LOGI(TAG, "Filesystem mounted");
     sdmmc_card_print_info(stdout, card);
+
+
+
     const char *file_log = MOUNT_POINT "/log.txt";
     ESP_LOGI(TAG, "Opening file %s", file_log);
     FILE *f = fopen(file_log, "w");
@@ -132,6 +136,7 @@ int app_main(void)
     {
         ESP_LOGI(TAG, "Taking picture...");
         camera_fb_t *pic = esp_camera_fb_get();
+
         // First create a file.
         sprintf(file_name, MOUNT_POINT "/img%d.jpg", pictureNumber);
         ESP_LOGI(TAG, "Opening file %s", file_name);
@@ -153,6 +158,7 @@ int app_main(void)
         }
         fclose(f);
         ESP_LOGI(TAG, "img written");
+
         if (pictureNumber > 10)
         {
             esp_vfs_fat_sdcard_unmount(mount_point, card);
@@ -161,6 +167,7 @@ int app_main(void)
             esp_camera_fb_return(pic);
             return 0;
         }
+
         esp_camera_fb_return(pic);
         vTaskDelay(3000 / portTICK_PERIOD_MS);
     }
