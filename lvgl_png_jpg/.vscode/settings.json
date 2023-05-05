@@ -27,6 +27,7 @@
     "sdcard.h": "c",
     "complex": "c",
     "condition_variable": "c",
-    "future": "c"
+    "future": "c",
+    "lvgl.h": "c"
   }
 }

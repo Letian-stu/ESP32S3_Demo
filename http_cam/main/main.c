@@ -38,28 +38,6 @@ static void initialise_wifi(void);
 static void event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data);
 static void cam_task(void *pvParameters);
 
-#define EXAMPLE_STATIC_IP_ADDR        "192.168.0.99"
-#define EXAMPLE_STATIC_NETMASK_ADDR   "255.255.255.0"
-#define EXAMPLE_STATIC_GW_ADDR        "192.168.0.1"
-
-static void example_set_static_ip(esp_netif_t *netif)
-{
-    if (esp_netif_dhcpc_stop(netif) != ESP_OK) {
-        printf( "Failed to stop dhcp client");
-        return;
-    }
-    esp_netif_ip_info_t ip;
-    memset(&ip, 0 , sizeof(esp_netif_ip_info_t));
-    ip.ip.addr = ipaddr_addr(EXAMPLE_STATIC_IP_ADDR);
-    ip.netmask.addr = ipaddr_addr(EXAMPLE_STATIC_NETMASK_ADDR);
-    ip.gw.addr = ipaddr_addr(EXAMPLE_STATIC_GW_ADDR);
-    if (esp_netif_set_ip_info(netif, &ip) != ESP_OK) {
-        printf("Failed to set ip info");
-        return;
-    }
-    printf( "Success to set static ip: %s, netmask: %s, gw: %s\n", EXAMPLE_STATIC_IP_ADDR, EXAMPLE_STATIC_NETMASK_ADDR, EXAMPLE_STATIC_GW_ADDR);
-}
-
 void app_main()
 {
     esp_err_t err = nvs_flash_init();
@@ -94,9 +72,9 @@ void app_main()
         .ledc_channel = LEDC_CHANNEL_0,
 
         .pixel_format = PIXFORMAT_JPEG, // YUV422,GRAYSCALE,RGB565,JPEG
-        .frame_size = FRAMESIZE_VGA,
+        .frame_size = FRAMESIZE_SVGA,
         .jpeg_quality = 12, // 0-63 lower number means higher quality
-        .fb_count = 5   // if more than one, i2s runs in continuous mode. Use only with JPEG
+        .fb_count = 8   // if more than one, i2s runs in continuous mode. Use only with JPEG
     };
 
     err = esp_camera_init(&camera_config);
@@ -125,36 +103,46 @@ static void initialise_wifi(void)
 
     //设置wifi
     wifi_config_t wifi_config =
-        {
-            .sta = {
-                .ssid = "home",
-                .password = "1656733975",
-                .scan_method = WIFI_FAST_SCAN,
-                .bssid_set = 0,
-                .channel = 0,
-                .sort_method = WIFI_CONNECT_AP_BY_SIGNAL,
-                .threshold.rssi = -70,
-                .threshold.authmode = WIFI_AUTH_OPEN,
-            },
-        };
+    {
+        .sta = {
+            .ssid = "tian",
+            .password = "11112222",
+        },
+    };
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
     ESP_ERROR_CHECK(esp_wifi_connect());
 }
 
 static void event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 {
-    //printf("ESP:%s,%d\r\n", event_base, event_id);
-    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED)
-    {
-        example_set_static_ip(arg);
-    }
-    else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) //断开后重
+    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) //断开后重
     {
         esp_wifi_connect();
     }
     else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) //获取到IP地址
     {
+        ip_event_got_ip_t *event = (ip_event_got_ip_t *)event_data;
+        ESP_LOGI(TAG, "Got IP IPv4 address: " IPSTR, IP2STR(&event->ip_info.ip));
+
         xTaskCreate(&cam_task, "cam_task", 4096*2, NULL, 5, NULL); 
+    }
+    else if(event_id == WIFI_EVENT_STA_DISCONNECTED)   
+    {
+        static int count = 6;
+        esp_err_t err;
+        ESP_LOGI(TAG, "Wi-Fi disconnected, trying to reconnect...");
+        if (count > 0) 
+        {
+            err = esp_wifi_connect();
+            if (err == ESP_ERR_WIFI_NOT_STARTED) {
+                return;
+            }
+            count--;
+        } 
+        else 
+        {
+            ESP_LOGE(TAG, "try max connect count, but failed");
+        }
     }
 }
 
@@ -249,7 +237,6 @@ httpd_handle_t start_webserver(void)
 {
     /* 生成默认的配置参*/
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
-    config.server_port = 8081;
     /* 置空 esp_http_server 的实例句 */
     httpd_handle_t server = NULL;
     /* 启动 httpd server */

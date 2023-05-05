@@ -1,4 +1,4 @@
-# Install script for directory: D:/Desktop/lvgl_png_jpg/components/lvgl_esp32_drivers
+# Install script for directory: D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/components/lvgl_esp32_drivers
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

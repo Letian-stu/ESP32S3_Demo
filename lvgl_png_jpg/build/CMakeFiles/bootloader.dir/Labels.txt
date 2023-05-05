@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-D:/Desktop/lvgl_png_jpg/build/CMakeFiles/bootloader
-D:/Desktop/lvgl_png_jpg/build/CMakeFiles/bootloader.rule
-D:/Desktop/lvgl_png_jpg/build/CMakeFiles/bootloader-complete.rule
-D:/Desktop/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-D:/Desktop/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-D:/Desktop/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-D:/Desktop/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-D:/Desktop/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-D:/Desktop/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-D:/Desktop/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/CMakeFiles/bootloader
+D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/CMakeFiles/bootloader.rule
+D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/CMakeFiles/bootloader-complete.rule
+D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

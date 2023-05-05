@@ -1,4 +1,4 @@
-# Install script for directory: D:/Desktop/lvgl_png_jpg/components/lv_lib_split_jpg
+# Install script for directory: D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/components/lv_lib_split_jpg
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

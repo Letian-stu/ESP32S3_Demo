@@ -1,4 +1,4 @@
-# Install script for directory: D:/Desktop/lvgl_png_jpg
+# Install script for directory: D:/C_Github/ESP32S3_Demo/lvgl_png_jpg
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/Desktop/lvgl_png_jpg/build/esp-idf/cmake_install.cmake")
+  include("D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/esp-idf/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/Desktop/lvgl_png_jpg/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/C_Github/ESP32S3_Demo/lvgl_png_jpg/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
