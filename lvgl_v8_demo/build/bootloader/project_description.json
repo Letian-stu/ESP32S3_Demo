@@ -1,8 +1,8 @@
 {
     "project_name":       "bootloader",
     "project_path":       "/home/letian/Desktop/software/esp32/esp-idf/esp-idf/components/bootloader/subproject",
-    "build_dir":          "/home/letian/Desktop/software/esp32/demo/lvgl_v8/build/bootloader",
-    "config_file":        "/home/letian/Desktop/software/esp32/demo/lvgl_v8/sdkconfig",
+    "build_dir":          "/home/letian/Desktop/software/esp32/ESP32S3_Demo/lvgl_v8_demo/build/bootloader",
+    "config_file":        "/home/letian/Desktop/software/esp32/ESP32S3_Demo/lvgl_v8_demo/sdkconfig",
     "config_defaults":    "",
     "app_elf":            "bootloader.elf",
     "app_bin":            "bootloader.bin",

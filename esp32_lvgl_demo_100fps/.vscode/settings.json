@@ -1,0 +1,22 @@
+{
+  "C_Cpp.intelliSenseEngine": "Tag Parser",
+  "idf.port": "/dev/ttyUSB0",
+  "files.associations": {
+    "lvgl_helpers.h": "c",
+    "stdbool.h": "c",
+    "*.ipp": "c",
+    "*.inc": "c",
+    "esp_freertos_hooks.h": "c",
+    "lv_demo_benchmark.h": "c",
+    "string_view": "cpp",
+    "regex": "cpp",
+    "array": "cpp",
+    "string": "cpp",
+    "touch_driver.h": "c"
+  },
+  "idf.adapterTargetName": "esp32s3",
+  "idf.openOcdConfigs": [
+    "interface/ftdi/esp32_devkitj_v1.cfg",
+    "target/esp32s3.cfg"
+  ]
+}

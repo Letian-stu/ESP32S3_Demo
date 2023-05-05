@@ -1,4 +1,4 @@
-# Install script for directory: /home/letian/Desktop/software/esp32/demo/lvgl_v8/components/lvgl_esp32_drivers
+# Install script for directory: /home/letian/Desktop/software/esp32/ESP32S3_Demo/lvgl_v8_demo/components/lvgl_esp32_drivers
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
