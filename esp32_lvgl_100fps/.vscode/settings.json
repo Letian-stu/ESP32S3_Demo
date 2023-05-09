@@ -12,7 +12,13 @@
     "regex": "cpp",
     "array": "cpp",
     "string": "cpp",
-    "touch_driver.h": "c"
+    "touch_driver.h": "c",
+    "lvgl_spi_conf.h": "c",
+    "esp_lcd_backlight.h": "c",
+    "disp_driver.h": "c",
+    "bitset": "c",
+    "initializer_list": "c",
+    "utility": "c"
   },
   "idf.adapterTargetName": "esp32s3",
   "idf.openOcdConfigs": [

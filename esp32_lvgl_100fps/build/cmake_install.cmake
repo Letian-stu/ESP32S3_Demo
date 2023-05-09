@@ -1,4 +1,4 @@
-# Install script for directory: /home/letian/Desktop/software/esp32_lvgl_demo
+# Install script for directory: /home/letian/Desktop/software/esp32/ESP32S3_Demo/esp32_lvgl_100fps
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/letian/Desktop/software/esp32_lvgl_demo/build/esp-idf/cmake_install.cmake")
+  include("/home/letian/Desktop/software/esp32/ESP32S3_Demo/esp32_lvgl_100fps/build/esp-idf/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/letian/Desktop/software/esp32_lvgl_demo/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/letian/Desktop/software/esp32/ESP32S3_Demo/esp32_lvgl_100fps/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

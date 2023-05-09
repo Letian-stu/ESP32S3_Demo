@@ -1,0 +1,24 @@
+{
+  "C_Cpp.intelliSenseEngine": "Tag Parser",
+  "idf.adapterTargetName": "esp32s3",
+  "idf.port": "/dev/ttyUSB0",
+  "files.associations": {
+    "thread": "c",
+    "string_view": "c",
+    "regex": "c",
+    "*.tcc": "c",
+    "optional": "c",
+    "istream": "c",
+    "ostream": "c",
+    "ratio": "c",
+    "system_error": "c",
+    "array": "c",
+    "functional": "c",
+    "tuple": "c",
+    "type_traits": "c",
+    "utility": "c",
+    "chrono": "c",
+    "hid_dev.h": "c",
+    "hidd_le_prf_int.h": "c"
+  }
+}

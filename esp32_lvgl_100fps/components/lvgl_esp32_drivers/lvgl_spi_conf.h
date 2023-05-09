@@ -84,104 +84,15 @@ extern "C" {
 #define DISP_SPI_TRANS_MODE_SIO
 #endif
 
-#if defined (CONFIG_LV_TOUCH_CONTROLLER_SPI2_HOST)
-#define TOUCH_SPI_HOST SPI2_HOST
-#elif defined (CONFIG_LV_TOUCH_CONTROLLER_SPI3_HOST)
-#define TOUCH_SPI_HOST SPI3_HOST
-#endif
 
-/* Handle the FT81X Special case */
-#if defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_FT81X)
-
-#if defined (CONFIG_LV_TOUCH_CONTROLLER_FT81X)
-#define SHARED_SPI_BUS
-#else
-/* Empty */
-#endif
-
-#else
-// Detect the use of a shared SPI Bus and verify the user specified the same SPI bus for both touch and tft
-#if defined (CONFIG_LV_TOUCH_DRIVER_PROTOCOL_SPI) && TP_SPI_MOSI == DISP_SPI_MOSI && TP_SPI_CLK == DISP_SPI_CLK
-#if TFT_SPI_HOST != TOUCH_SPI_HOST
-#error You must specify the same SPI host (SPIx_HOST) for both display and touch driver
-#endif
-
-#define SHARED_SPI_BUS
-#endif
-
-#endif
 
 /**********************
  *      TYPEDEFS
  **********************/
-#if defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9481) || \
-    defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9488)
 
-#define SPI_BUS_MAX_TRANSFER_SZ (DISP_BUF_SIZE * 3)
-
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9341)  || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7789)   || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7735S)  || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_HX8357)   || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_SH1107)   || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_FT81X)    || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_IL3820)   || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_JD79653A) || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9163C)
-
-#define SPI_BUS_MAX_TRANSFER_SZ (DISP_BUF_SIZE * 2)
-
-#else
-#define SPI_BUS_MAX_TRANSFER_SZ (DISP_BUF_SIZE * 2)
-#endif
-
-#if defined (CONFIG_LV_TFT_USE_CUSTOM_SPI_CLK_DIVIDER)
+#define SPI_BUS_MAX_TRANSFER_SZ (LV_HOR_RES_MAX * 60 * 2)
 #define SPI_TFT_CLOCK_SPEED_HZ ((80 * 1000 * 1000) / CONFIG_LV_TFT_CUSTOM_SPI_CLK_DIVIDER)
-#else
-#if defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7789)
-#define SPI_TFT_CLOCK_SPEED_HZ  (20*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7735S)
-#define SPI_TFT_CLOCK_SPEED_HZ  (40*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_HX8357)
-#define SPI_TFT_CLOCK_SPEED_HZ  (26*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_SH1107)
-#define SPI_TFT_CLOCK_SPEED_HZ  (8*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9481)
-#define SPI_TFT_CLOCK_SPEED_HZ  (16*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9486)
-#define SPI_TFT_CLOCK_SPEED_HZ  (20*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9488)
-#define SPI_TFT_CLOCK_SPEED_HZ  (40*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9341)
-#define SPI_TFT_CLOCK_SPEED_HZ  (40*1000*1000)
-#elif defined(CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9163C)
-#define SPI_TFT_CLOCK_SPEED_HZ (40 * 1000 * 1000)
-#elif defined(CONFIG_LV_TFT_DISPLAY_CONTROLLER_FT81X)
-#define SPI_TFT_CLOCK_SPEED_HZ  (32*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_PCD8544)
-#define SPI_TFT_CLOCK_SPEED_HZ  (4*1000*1000)
-#else
-#define SPI_TFT_CLOCK_SPEED_HZ  (40*1000*1000)
-#endif
-
-#endif
-
-
-#if defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7789)
 #define SPI_TFT_SPI_MODE    (2)
-#else
-#define SPI_TFT_SPI_MODE    (0)
-#endif
-
-/* Touch driver */
-#if (CONFIG_LV_TOUCH_CONTROLLER == TOUCH_CONTROLLER_STMPE610)
-#define SPI_TOUCH_CLOCK_SPEED_HZ    (1*1000*1000)
-#define SPI_TOUCH_SPI_MODE          (1)
-#else
-#define SPI_TOUCH_CLOCK_SPEED_HZ    (2*1000*1000)
-#define SPI_TOUCH_SPI_MODE          (0)
-#endif
-
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
