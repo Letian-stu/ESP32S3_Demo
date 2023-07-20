@@ -208,10 +208,10 @@ void hid_demo_task(void *pvParameters)
             vTaskDelay(5000 / portTICK_PERIOD_MS);
 
             printf("val up  \r\n");
-            esp_hidd_send_my_control_value(hid_conn_id,MY_CONTROL_VAL_UP);
+            esp_hidd_send_my_control_value(hid_conn_id,(uint16_t )(1 << 5));
             vTaskDelay(3000 / portTICK_PERIOD_MS);
             printf("val down  \r\n");
-            esp_hidd_send_my_control_value(hid_conn_id,MY_CONTROL_VAL_DOWN);
+            esp_hidd_send_my_control_value(hid_conn_id,(uint16_t)(1 << 6));
             vTaskDelay(3000 / portTICK_PERIOD_MS);    
         }
     }

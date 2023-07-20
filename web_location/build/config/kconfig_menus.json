@@ -1232,7 +1232,7 @@
                     {
                         "children": [],
                         "depends_on": "SECURE_TARGET_HAS_SECURE_ROM_DL_MODE && <choice SECURE_UART_ROM_DL_MODE>",
-                        "help": "If set, during startup the app will burn an eFuse bit to permanently switch the UART ROM\nDownload Mode into a separate Secure Download mode. This option can only work if\nDownload Mode is not already disabled by eFuse.\n\nSecure Download mode limits the use of Download Mode functions to simple flash read,\nwrite and erase operations, plus a command to return a summary of currently enabled\nsecurity features.\n\nSecure Download mode is not compatible with the esptool.py flasher stub feature,\nespefuse.py, read/writing memory or registers, encrypted download, or any other\nfeatures that interact with unsupported Download Mode commands.\n\nSecure Download mode should be enabled in any application where Flash Encryption\nand/or Secure Boot is enabled. Disabling this option does not immediately cancel\nthe benefits of the security features, but it increases the potential \"attack\nsurface\" for an attacker to try and bypass them with a successful physical attack.\n\nIt is also possible to enable secure download mode at runtime by calling\nesp_efuse_enable_rom_secure_download_mode()\n\nNote: Secure Download mode is not available for ESP32 (includes revisions till ECO3).",
+                        "help": "If set, during startup the app will burn an eFuse bit to permanently switch the UART ROM\nDownload Mode into a separate Secure Download mode. This option can only work if\nDownload Mode is not already disabled by eFuse.\n\nSecure Download mode limits the use of Download Mode functions to update SPI config,\nchanging baud rate, basic flash write and a command to return a summary of currently\nenabled security features (`get_security_info`).\n\nSecure Download mode is not compatible with the esptool.py flasher stub feature,\nespefuse.py, read/writing memory or registers, encrypted download, or any other\nfeatures that interact with unsupported Download Mode commands.\n\nSecure Download mode should be enabled in any application where Flash Encryption\nand/or Secure Boot is enabled. Disabling this option does not immediately cancel\nthe benefits of the security features, but it increases the potential \"attack\nsurface\" for an attacker to try and bypass them with a successful physical attack.\n\nIt is also possible to enable secure download mode at runtime by calling\nesp_efuse_enable_rom_secure_download_mode()\n\nNote: Secure Download mode is not available for ESP32 (includes revisions till ECO3).",
                         "id": "SECURE_ENABLE_SECURE_ROM_DL_MODE",
                         "name": "SECURE_ENABLE_SECURE_ROM_DL_MODE",
                         "range": null,
@@ -4202,6 +4202,16 @@
                                         "range": null,
                                         "title": "Enable HW AGC recorrect",
                                         "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "BT_ENABLED",
+                                        "help": "Disable active scan backoff. The bluetooth spec requires that scanners should run a backoff procedure to\nminimize collision of scan request PDUs from nultiple scanners. If scan backoff is disabled, in active\nscanning, scan request PDU will be sent every time when HW receives scannable ADV PDU.",
+                                        "id": "BT_CTRL_SCAN_BACKOFF_UPPERLIMITMAX",
+                                        "name": "BT_CTRL_SCAN_BACKOFF_UPPERLIMITMAX",
+                                        "range": null,
+                                        "title": "Disable active scan backoff",
+                                        "type": "bool"
                                     }
                                 ],
                                 "depends_on": "BT_ENABLED",
@@ -4528,6 +4538,16 @@
                                                 "type": "int"
                                             },
                                             {
+                                                "children": [],
+                                                "depends_on": "BT_GATTS_ENABLE && BT_BLUEDROID_ENABLED && BT_BLUEDROID_ENABLED",
+                                                "help": "Maximum GATT Service Attributes Count",
+                                                "id": "BT_GATT_MAX_SR_ATTRIBUTES",
+                                                "name": "BT_GATT_MAX_SR_ATTRIBUTES",
+                                                "range": null,
+                                                "title": "Max GATT Service Attributes",
+                                                "type": "int"
+                                            },
+                                            {
                                                 "children": [
                                                     {
                                                         "children": [],
@@ -4578,6 +4598,16 @@
                                     },
                                     {
                                         "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "BT_GATTC_ENABLE && BT_BLUEDROID_ENABLED",
+                                                "help": "Maximum GATTC cache characteristic count",
+                                                "id": "BT_GATTC_MAX_CACHE_CHAR",
+                                                "name": "BT_GATTC_MAX_CACHE_CHAR",
+                                                "range": null,
+                                                "title": "Max gattc cache characteristic for discover",
+                                                "type": "int"
+                                            },
                                             {
                                                 "children": [],
                                                 "depends_on": "BT_GATTC_ENABLE && BT_BLUEDROID_ENABLED",
@@ -6548,11 +6578,11 @@
                             {
                                 "children": [],
                                 "depends_on": "BT_BLUEDROID_ENABLED && BT_BLUEDROID_ENABLED",
-                                "help": "Maximum BT/BLE connection count",
+                                "help": "Maximum BT/BLE connection count. The ESP32-C3/S3 chip supports a maximum of 10 instances,\nincluding ADV, SCAN and connections. The ESP32-C3/S3 chip can connect up to 9 devices if\nADV or SCAN uses only one. If ADV and SCAN are both used, The ESP32-C3/S3 chip is connected\nto a maximum of 8 devices. Because Bluetooth cannot reclaim used instances once ADV or SCAN\nis used.",
                                 "id": "BT_ACL_CONNECTIONS",
                                 "name": "BT_ACL_CONNECTIONS",
                                 "range": null,
-                                "title": "BT/BLE MAX ACL CONNECTIONS(1~7)",
+                                "title": "BT/BLE MAX ACL CONNECTIONS(1~9)",
                                 "type": "int"
                             },
                             {
@@ -6607,7 +6637,7 @@
                             },
                             {
                                 "children": [],
-                                "depends_on": "BT_BLUEDROID_ENABLED && (BTDM_CTRL_MODE_BTDM || BTDM_CTRL_MODE_BLE_ONLY) && BT_BLUEDROID_ENABLED",
+                                "depends_on": "BT_BLUEDROID_ENABLED && BT_BLE_ENABLED && BT_BLUEDROID_ENABLED",
                                 "help": "Originally, when doing BLE active scan, Bluedroid will not report adv to application layer\nuntil receive scan response. This option is used to disable the behavior. When enable this option,\nBluedroid will report adv data or scan response to application layer immediately.\n\n# Memory reserved at start of DRAM for Bluetooth stack",
                                 "id": "BT_BLE_ACT_SCAN_REP_ADV_SCAN",
                                 "name": "BT_BLE_ACT_SCAN_REP_ADV_SCAN",
@@ -7940,6 +7970,16 @@
                         "range": null,
                         "title": "Divider for IV Update state refresh timer",
                         "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": "BLE_MESH",
+                        "help": "According to Section 3.10.5 of Mesh Specification v1.0.1.\nIf a node in Normal Operation receives a Secure Network beacon with an IV index\nequal to the last known IV index+1 and the IV Update Flag set to 0, the node may\nupdate its IV without going to the IV Update in Progress state, or it may initiate\nan IV Index Recovery procedure (Section 3.10.6), or it may ignore the Secure\nNetwork beacon. The node makes the choice depending on the time since last IV\nupdate and the likelihood that the node has missed the Secure Network beacons\nwith the IV update Flag.\nWhen the above situation is encountered, this option can be used to decide whether\nto perform the IV index recovery procedure.",
+                        "id": "BLE_MESH_IVU_RECOVERY_IVI",
+                        "name": "BLE_MESH_IVU_RECOVERY_IVI",
+                        "range": null,
+                        "title": "Recovery the IV index when the latest whole IV update procedure is missed",
+                        "type": "bool"
                     },
                     {
                         "children": [],
@@ -9975,32 +10015,24 @@
                                         "type": "int"
                                     },
                                     {
-                                        "children": [
-                                            {
-                                                "children": [],
-                                                "depends_on": "ESP32S3_SPIRAM_SUPPORT && ESP32S3_SPIRAM_SUPPORT",
-                                                "help": "The PSRAM Clock IO can be any unused GPIO, please refer to your hardware design.",
-                                                "id": "DEFAULT_PSRAM_CLK_IO",
-                                                "name": "DEFAULT_PSRAM_CLK_IO",
-                                                "range": null,
-                                                "title": "PSRAM CLK IO number",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "ESP32S3_SPIRAM_SUPPORT && ESP32S3_SPIRAM_SUPPORT",
-                                                "help": "The PSRAM CS IO can be any unused GPIO, please refer to your hardware design.",
-                                                "id": "DEFAULT_PSRAM_CS_IO",
-                                                "name": "DEFAULT_PSRAM_CS_IO",
-                                                "range": null,
-                                                "title": "PSRAM CS IO number",
-                                                "type": "int"
-                                            }
-                                        ],
-                                        "depends_on": "ESP32S3_SPIRAM_SUPPORT && ESP32S3_SPIRAM_SUPPORT",
-                                        "id": "component-config-esp32s3-specific-support-for-external-spi-connected-ram-spi-ram-config-psram-clock-and-cs-io-for-esp32s3",
-                                        "title": "PSRAM Clock and CS IO for ESP32S3",
-                                        "type": "menu"
+                                        "children": [],
+                                        "depends_on": "ESP32S3_SPIRAM_SUPPORT",
+                                        "help": null,
+                                        "id": "SPIRAM_CLK_IO",
+                                        "name": "SPIRAM_CLK_IO",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "ESP32S3_SPIRAM_SUPPORT",
+                                        "help": null,
+                                        "id": "SPIRAM_CS_IO",
+                                        "name": "SPIRAM_CS_IO",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
                                     },
                                     {
                                         "children": [],
@@ -12929,6 +12961,19 @@
                         "range": null,
                         "title": "Wifi sleep optimize when beacon lost",
                         "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Maximum number of encrypted peers supported by espnow.\nThe number of hardware keys for encryption is fixed. And the espnow and SoftAP share the same\nhardware keys. So this configuration will affect the maximum connection number of SoftAP.\nMaximum espnow encrypted peers number + maximum number of connections of SoftAP = Max hardware keys number.\n\nWhen using ESP mesh, this value should be set to a maximum of 6.",
+                        "id": "ESP_WIFI_ESPNOW_MAX_ENCRYPT_NUM",
+                        "name": "ESP_WIFI_ESPNOW_MAX_ENCRYPT_NUM",
+                        "range": [
+                            0,
+                            17
+                        ],
+                        "title": "Maximum espnow encrypt peers number",
+                        "type": "int"
                     }
                 ],
                 "depends_on": null,
@@ -13861,63 +13906,11 @@
                     {
                         "children": [],
                         "depends_on": null,
-                        "help": "Modbus slave Timer group number that is used for timeout measurement.",
-                        "id": "FMB_TIMER_GROUP",
-                        "name": "FMB_TIMER_GROUP",
-                        "range": [
-                            0,
-                            1
-                        ],
-                        "title": "Slave Timer group number",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Modbus slave Timer Index in the group that is used for timeout measurement.",
-                        "id": "FMB_TIMER_INDEX",
-                        "name": "FMB_TIMER_INDEX",
-                        "range": [
-                            0,
-                            1
-                        ],
-                        "title": "Slave Timer index in the group",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Modbus master Timer group number that is used for timeout measurement.",
-                        "id": "FMB_MASTER_TIMER_GROUP",
-                        "name": "FMB_MASTER_TIMER_GROUP",
-                        "range": [
-                            0,
-                            1
-                        ],
-                        "title": "Master Timer group number",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "Modbus master Timer Index in the group that is used for timeout measurement.\nNote: Modbus master and slave should have different timer index to be able to work simultaneously.",
-                        "id": "FMB_MASTER_TIMER_INDEX",
-                        "name": "FMB_MASTER_TIMER_INDEX",
-                        "range": [
-                            0,
-                            1
-                        ],
-                        "title": "Master Timer index",
-                        "type": "int"
-                    },
-                    {
-                        "children": [],
-                        "depends_on": null,
-                        "help": "This option places Modbus timer IRQ handler into IRAM.\nThis allows to avoid delays related to processing of non-IRAM-safe interrupts\nduring a flash write operation (NVS updating a value, or some other\nflash API which has to perform an read/write operation and disable CPU cache).\nThis option has dependency with the UART_ISR_IN_IRAM option which places UART interrupt\nhandler into IRAM to prevent delays related to processing of UART events.",
-                        "id": "FMB_TIMER_ISR_IN_IRAM",
-                        "name": "FMB_TIMER_ISR_IN_IRAM",
+                        "help": "If this option is set the Modbus stack uses ISR dispatch method\nto send timeout events from the callback function called from ISR.\nThis option has dependency with the UART_ISR_IN_IRAM option which places UART interrupt\nhandler into IRAM to prevent delays related to processing of UART events.",
+                        "id": "FMB_TIMER_USE_ISR_DISPATCH_METHOD",
+                        "name": "FMB_TIMER_USE_ISR_DISPATCH_METHOD",
                         "range": null,
-                        "title": "Place timer interrupt handler into IRAM",
+                        "title": "Modbus timer uses ISR dispatch method",
                         "type": "bool"
                     }
                 ],
@@ -15551,11 +15544,21 @@
                             {
                                 "children": [],
                                 "depends_on": null,
-                                "help": "Set maximum segment lifetime in in milliseconds.",
+                                "help": "Set maximum segment lifetime in milliseconds.",
                                 "id": "LWIP_TCP_MSL",
                                 "name": "LWIP_TCP_MSL",
                                 "range": null,
                                 "title": "Maximum segment lifetime (MSL)",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Set maximum segment lifetime in milliseconds.",
+                                "id": "LWIP_TCP_FIN_WAIT_TIMEOUT",
+                                "name": "LWIP_TCP_FIN_WAIT_TIMEOUT",
+                                "range": null,
+                                "title": "Maximum FIN segment lifetime",
                                 "type": "int"
                             },
                             {
@@ -19018,6 +19021,16 @@
                         "name": "SPI_FLASH_ENABLE_ENCRYPTED_READ_WRITE",
                         "range": null,
                         "title": "Enable encrypted partition read/write operations",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "This option is invisible, and will be selected automatically\nwhen ``ESPTOOLPY_FLASHFREQ_120M`` is selected.",
+                        "id": "SPI_FLASH_HPM_ENABLE",
+                        "name": "SPI_FLASH_HPM_ENABLE",
+                        "range": null,
+                        "title": null,
                         "type": "bool"
                     }
                 ],

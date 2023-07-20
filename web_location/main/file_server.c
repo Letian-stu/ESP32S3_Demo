@@ -296,9 +296,7 @@ static esp_err_t handleUpdateLocation(httpd_req_t *req)
 
     ESP_LOGI(TAG, "send location");
     httpd_resp_sendstr(req, sendbuff);
-//   // 在此处修改变量的值
-//   myVariable = "新值";
-//   // 发送更新后的变量值作为响应
+
 //   server.send(200, "text/plain", myVariable);
     httpd_resp_send_chunk(req, NULL, 0);
     return ESP_OK;

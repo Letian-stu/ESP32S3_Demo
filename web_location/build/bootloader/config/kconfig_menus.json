@@ -1160,7 +1160,7 @@
                     {
                         "children": [],
                         "depends_on": "SECURE_TARGET_HAS_SECURE_ROM_DL_MODE && <choice SECURE_UART_ROM_DL_MODE>",
-                        "help": "If set, during startup the app will burn an eFuse bit to permanently switch the UART ROM\nDownload Mode into a separate Secure Download mode. This option can only work if\nDownload Mode is not already disabled by eFuse.\n\nSecure Download mode limits the use of Download Mode functions to simple flash read,\nwrite and erase operations, plus a command to return a summary of currently enabled\nsecurity features.\n\nSecure Download mode is not compatible with the esptool.py flasher stub feature,\nespefuse.py, read/writing memory or registers, encrypted download, or any other\nfeatures that interact with unsupported Download Mode commands.\n\nSecure Download mode should be enabled in any application where Flash Encryption\nand/or Secure Boot is enabled. Disabling this option does not immediately cancel\nthe benefits of the security features, but it increases the potential \"attack\nsurface\" for an attacker to try and bypass them with a successful physical attack.\n\nIt is also possible to enable secure download mode at runtime by calling\nesp_efuse_enable_rom_secure_download_mode()\n\nNote: Secure Download mode is not available for ESP32 (includes revisions till ECO3).",
+                        "help": "If set, during startup the app will burn an eFuse bit to permanently switch the UART ROM\nDownload Mode into a separate Secure Download mode. This option can only work if\nDownload Mode is not already disabled by eFuse.\n\nSecure Download mode limits the use of Download Mode functions to update SPI config,\nchanging baud rate, basic flash write and a command to return a summary of currently\nenabled security features (`get_security_info`).\n\nSecure Download mode is not compatible with the esptool.py flasher stub feature,\nespefuse.py, read/writing memory or registers, encrypted download, or any other\nfeatures that interact with unsupported Download Mode commands.\n\nSecure Download mode should be enabled in any application where Flash Encryption\nand/or Secure Boot is enabled. Disabling this option does not immediately cancel\nthe benefits of the security features, but it increases the potential \"attack\nsurface\" for an attacker to try and bypass them with a successful physical attack.\n\nIt is also possible to enable secure download mode at runtime by calling\nesp_efuse_enable_rom_secure_download_mode()\n\nNote: Secure Download mode is not available for ESP32 (includes revisions till ECO3).",
                         "id": "SECURE_ENABLE_SECURE_ROM_DL_MODE",
                         "name": "SECURE_ENABLE_SECURE_ROM_DL_MODE",
                         "range": null,
@@ -2783,32 +2783,24 @@
                                         "type": "int"
                                     },
                                     {
-                                        "children": [
-                                            {
-                                                "children": [],
-                                                "depends_on": "ESP32S3_SPIRAM_SUPPORT && ESP32S3_SPIRAM_SUPPORT",
-                                                "help": "The PSRAM Clock IO can be any unused GPIO, please refer to your hardware design.",
-                                                "id": "DEFAULT_PSRAM_CLK_IO",
-                                                "name": "DEFAULT_PSRAM_CLK_IO",
-                                                "range": null,
-                                                "title": "PSRAM CLK IO number",
-                                                "type": "int"
-                                            },
-                                            {
-                                                "children": [],
-                                                "depends_on": "ESP32S3_SPIRAM_SUPPORT && ESP32S3_SPIRAM_SUPPORT",
-                                                "help": "The PSRAM CS IO can be any unused GPIO, please refer to your hardware design.",
-                                                "id": "DEFAULT_PSRAM_CS_IO",
-                                                "name": "DEFAULT_PSRAM_CS_IO",
-                                                "range": null,
-                                                "title": "PSRAM CS IO number",
-                                                "type": "int"
-                                            }
-                                        ],
-                                        "depends_on": "ESP32S3_SPIRAM_SUPPORT && ESP32S3_SPIRAM_SUPPORT",
-                                        "id": "component-config-esp32s3-specific-support-for-external-spi-connected-ram-spi-ram-config-psram-clock-and-cs-io-for-esp32s3",
-                                        "title": "PSRAM Clock and CS IO for ESP32S3",
-                                        "type": "menu"
+                                        "children": [],
+                                        "depends_on": "ESP32S3_SPIRAM_SUPPORT",
+                                        "help": null,
+                                        "id": "SPIRAM_CLK_IO",
+                                        "name": "SPIRAM_CLK_IO",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "ESP32S3_SPIRAM_SUPPORT",
+                                        "help": null,
+                                        "id": "SPIRAM_CS_IO",
+                                        "name": "SPIRAM_CS_IO",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
                                     },
                                     {
                                         "children": [],
@@ -5501,6 +5493,16 @@
                         "name": "SPI_FLASH_ENABLE_ENCRYPTED_READ_WRITE",
                         "range": null,
                         "title": "Enable encrypted partition read/write operations",
+                        "type": "bool"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "This option is invisible, and will be selected automatically\nwhen ``ESPTOOLPY_FLASHFREQ_120M`` is selected.",
+                        "id": "SPI_FLASH_HPM_ENABLE",
+                        "name": "SPI_FLASH_HPM_ENABLE",
+                        "range": null,
+                        "title": null,
                         "type": "bool"
                     }
                 ],

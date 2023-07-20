@@ -1,4 +1,4 @@
-# Install script for directory: /home/letian/Desktop/software/esp32/demo/ble_hid_device_demo/main
+# Install script for directory: /home/letian/Desktop/software/github/ESP32S3_Demo/ble_hid_device_change/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

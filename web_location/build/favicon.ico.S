@@ -1,4 +1,4 @@
-/* * Data converted from D:/Desktop/file_serving/main/favicon.ico
+/* * Data converted from /home/letian/Desktop/software/github/ESP32S3_Demo/web_location/main/favicon.ico
  */
 .data
 .section .rodata.embedded

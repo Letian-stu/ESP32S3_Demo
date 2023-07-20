@@ -1,4 +1,4 @@
-/* * Data converted from /home/letian/Desktop/software/esp32/demo/ble_hid_device_demo/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /home/letian/Desktop/software/github/ESP32S3_Demo/ble_hid_device_change/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

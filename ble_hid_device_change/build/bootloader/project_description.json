@@ -1,8 +1,8 @@
 {
     "project_name":       "bootloader",
     "project_path":       "/home/letian/Desktop/software/esp32/esp-idf/esp-idf/components/bootloader/subproject",
-    "build_dir":          "/home/letian/Desktop/software/esp32/demo/ble_hid_device_demo/build/bootloader",
-    "config_file":        "/home/letian/Desktop/software/esp32/demo/ble_hid_device_demo/sdkconfig",
+    "build_dir":          "/home/letian/Desktop/software/github/ESP32S3_Demo/ble_hid_device_change/build/bootloader",
+    "config_file":        "/home/letian/Desktop/software/github/ESP32S3_Demo/ble_hid_device_change/sdkconfig",
     "config_defaults":    "",
     "app_elf":            "bootloader.elf",
     "app_bin":            "bootloader.bin",

@@ -1,6 +1,6 @@
-set(CMAKE_HOST_SYSTEM "Linux-5.19.0-35-generic")
+set(CMAKE_HOST_SYSTEM "Linux-5.19.0-41-generic")
 set(CMAKE_HOST_SYSTEM_NAME "Linux")
-set(CMAKE_HOST_SYSTEM_VERSION "5.19.0-35-generic")
+set(CMAKE_HOST_SYSTEM_VERSION "5.19.0-41-generic")
 set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
 include("/home/letian/Desktop/software/esp32/esp-idf/esp-idf/tools/cmake/toolchain-esp32s3.cmake")

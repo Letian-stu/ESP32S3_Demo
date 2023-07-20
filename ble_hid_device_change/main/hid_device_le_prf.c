@@ -185,26 +185,32 @@ static const uint8_t hidReportMap[] = {
 #endif
 #ifdef MY_CONTROL_HID
     // add by tian
-    0x05, 0x0c, // USAGE_PAGE (Consumer Devices)
-    0x09, 0x01, // Usage (Consumer Control)
-    0xa1, 0x01, // Collection (Application)
-    0x85, 0x05, //   Report Id (5)
-    0x15, 0x00, //   Logical minimum  (0)
-    0x25, 0x01, //   Logical maximum (1)
-    0x75, 0x01, //   Report Size (1)
-    0x95, 0x01, //   Report Count (1)
-    0x81, 0x06, //   Input (Data,Var,Rel)
-    0x09, 0xCD, //   Usage (Play/Pause)						//播放/暂停
-    0x09, 0x6F, //   Usage (Display Brightness Increment)   //亮度增加
-    0x09, 0x70, //   Usage (Display Brightness Decrement)	//亮度降低
-    0x09, 0xb5, //   Usage (Scan Next Track)				//下一曲
-    0x09, 0xb6, //   Usage (Scan Previous Track)			//上一曲
-    0x09, 0xe9, //   Usage (Volume Up)						//音量增大
-    0x09, 0xea, //   Usage (Volume Down)					//音量减小
-    0x75, 0x08, //   Report Size (8)
-    0x95, 0x01, //   Report Count (1)
-    0x81, 0x01, //   Input: (Constant)						//保留
-    0xc0        // End Collection
+	0x05, 0x0c,       // USAGE_PAGE (Consumer Devices)
+    0x09, 0x01,       // Usage (Consumer Control)
+    0xa1, 0x01,       // Collection (Application)
+    0x85, 0x05,       //   Report Id (5)
+    0x15, 0x00,       //   Logical minimum  (0)
+    0x25, 0x01,       //   Logical maximum (1)
+    0x75, 0x01,       //   Report Size (1)
+    0x95, 0x01,       //   Report Count (1)
+    0x09, 0xCD,       //   Usage (Play/Pause)						//播放/暂停
+    0x81, 0x06,       //   Input (Data,Var,Rel)
+    0x09, 0x6F,       //   Usage (Display Brightness Increment)		//亮度增加
+    0x81, 0x06,       //   Input (Data,Var,Rel)
+    0x09, 0x70,       //   Usage (Display Brightness Decrement)		//亮度降低
+    0x81, 0x06,       //   Input (Data,Var,Rel)
+    0x09, 0xb5,       //   Usage (Scan Next Track)					//下一曲
+    0x81, 0x06,       //   Input (Data,Var,Rel)
+    0x09, 0xb6,       //   Usage (Scan Previous Track)				//上一曲
+    0x81, 0x06,       //   Input (Data,Var,Rel)
+    0x09, 0xe9,       //   Usage (Volume Up)						//音量增大
+    0x81, 0x06,       //   Input (Data,Var,Rel)
+    0x09, 0xea,       //   Usage (Volume Down)						//音量减小
+    0x81, 0x06,       //   Input (Data,Var,Rel)
+	0x95, 0x01, 	  //   Report Count (1)
+    0x75, 0x08,  	  //   Report Size (1)
+    0x81, 0x01,  	  //   Input: (Constant)						//保留
+    0xc0              // End Collection
 
 #endif
 
