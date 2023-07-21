@@ -1,27 +1,11 @@
-/*
- * SPDX-FileCopyrightText: 2022 Espressif Systems (Shanghai) CO LTD
- *
- * SPDX-License-Identifier: Unlicense OR CC0-1.0
- */
-/* HTTP File Server Example
-
-   This example code is in the Public Domain (or CC0 licensed, at your option.)
-
-   Unless required by applicable law or agreed to in writing, this
-   software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
-   CONDITIONS OF ANY KIND, either express or implied.
-*/
-
 #include <stdio.h>
 #include <string.h>
 #include <sys/param.h>
 #include <sys/unistd.h>
 #include <sys/stat.h>
 #include <dirent.h>
-
 #include "esp_err.h"
 #include "esp_log.h"
-
 #include "esp_vfs.h"
 #include "esp_spiffs.h"
 #include "esp_http_server.h"
@@ -36,6 +20,9 @@
 
 /* Scratch buffer size */
 #define SCRATCH_BUFSIZE  8192
+
+#define IS_FILE_EXT(filename, ext) \
+    (strcasecmp(&filename[strlen(filename) - sizeof(ext) + 1], ext) == 0)
 
 struct file_server_data {
     /* Base path of file storage */
@@ -159,8 +146,6 @@ static esp_err_t http_resp_dir_html(httpd_req_t *req, const char *dirpath)
     return ESP_OK;
 }
 
-#define IS_FILE_EXT(filename, ext) \
-    (strcasecmp(&filename[strlen(filename) - sizeof(ext) + 1], ext) == 0)
 
 /* Set HTTP response content type according to file extension */
 static esp_err_t set_content_type_from_file(httpd_req_t *req, const char *filename)
@@ -208,84 +193,22 @@ static const char* get_path_from_uri(char *dest, const char *base_path, const ch
     return dest + base_pathlen;
 }
 
-/* Handler to download a file kept on the server */
-static esp_err_t download_get_handler(httpd_req_t *req)
+
+static esp_err_t amap_get_handler(httpd_req_t *req)
 {
     char filepath[FILE_PATH_MAX];
-    FILE *fd = NULL;
-    struct stat file_stat;
 
-    const char *filename = get_path_from_uri(filepath, ((struct file_server_data *)req->user_ctx)->base_path,
-                                             req->uri, sizeof(filepath));
+    const char *filename = get_path_from_uri(filepath, ((struct file_server_data *)req->user_ctx)->base_path, req->uri, sizeof(filepath));
     if (!filename) {
         ESP_LOGE(TAG, "Filename is too long");
         /* Respond with 500 Internal Server Error */
         httpd_resp_send_err(req, HTTPD_500_INTERNAL_SERVER_ERROR, "Filename too long");
         return ESP_FAIL;
     }
-
+    ESP_LOGI(TAG, "filepath:%s filename :%s",filepath,filename);
     /* If name has trailing '/', respond with directory contents */
-    if (filename[strlen(filename) - 1] == '/') {
-        return http_resp_dir_html(req, filepath);
-    }
+    http_resp_dir_html(req, filepath);
 
-    if (stat(filepath, &file_stat) == -1) {
-        /* If file not present on SPIFFS check if URI
-         * corresponds to one of the hardcoded paths */
-        if (strcmp(filename, "/index.html") == 0) {
-            return index_html_get_handler(req);
-        } else if (strcmp(filename, "/favicon.ico") == 0) {
-            return favicon_get_handler(req);
-        }
-        ESP_LOGE(TAG, "Failed to stat file : %s", filepath);
-        /* Respond with 404 Not Found */
-        httpd_resp_send_err(req, HTTPD_404_NOT_FOUND, "File does not exist");
-        return ESP_FAIL;
-    }
-
-    fd = fopen(filepath, "r");
-    if (!fd) {
-        ESP_LOGE(TAG, "Failed to read existing file : %s", filepath);
-        /* Respond with 500 Internal Server Error */
-        httpd_resp_send_err(req, HTTPD_500_INTERNAL_SERVER_ERROR, "Failed to read existing file");
-        return ESP_FAIL;
-    }
-
-    ESP_LOGI(TAG, "Sending file : %s (%ld bytes)...", filename, file_stat.st_size);
-    set_content_type_from_file(req, filename);
-
-    /* Retrieve the pointer to scratch buffer for temporary storage */
-    char *chunk = ((struct file_server_data *)req->user_ctx)->scratch;
-    size_t chunksize;
-    do {
-        /* Read file in chunks into the scratch buffer */
-        chunksize = fread(chunk, 1, SCRATCH_BUFSIZE, fd);
-
-        if (chunksize > 0) {
-            /* Send the buffer contents as HTTP response chunk */
-            if (httpd_resp_send_chunk(req, chunk, chunksize) != ESP_OK) {
-                fclose(fd);
-                ESP_LOGE(TAG, "File sending failed!");
-                /* Abort sending file */
-                httpd_resp_sendstr_chunk(req, NULL);
-                /* Respond with 500 Internal Server Error */
-                httpd_resp_send_err(req, HTTPD_500_INTERNAL_SERVER_ERROR, "Failed to send file");
-               return ESP_FAIL;
-           }
-        }
-
-        /* Keep looping till the whole file is sent */
-    } while (chunksize != 0);
-
-    /* Close file after sending complete */
-    fclose(fd);
-    ESP_LOGI(TAG, "File sending complete");
-
-    /* Respond with an empty chunk to signal HTTP response completion */
-#ifdef CONFIG_EXAMPLE_HTTPD_CONN_CLOSE_HEADER
-    httpd_resp_set_hdr(req, "Connection", "close");
-#endif
-    httpd_resp_send_chunk(req, NULL, 0);
     return ESP_OK;
 }
 
@@ -337,9 +260,9 @@ esp_err_t example_start_file_server(const char *base_path)
 
     /* URI handler for getting uploaded files */
     httpd_uri_t file_download = {
-        .uri       = "/main/",  // Match all URIs of type /path/to/file
+        .uri       = "/",  // Match all URIs of type /path/to/file
         .method    = HTTP_GET,
-        .handler   = download_get_handler,
+        .handler   = amap_get_handler,
         .user_ctx  = server_data    // Pass server data as context
     };
     httpd_register_uri_handler(server, &file_download);

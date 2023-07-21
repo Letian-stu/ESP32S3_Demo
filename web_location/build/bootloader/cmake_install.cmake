@@ -1,8 +1,8 @@
-# Install script for directory: /home/letian/Desktop/software/esp32/esp-idf/esp-idf/components/bootloader/subproject
+# Install script for directory: D:/B_Code/espidf/esp32idf_cmd/Espressif/frameworks/esp-idf-v4.4.3/components/bootloader/subproject
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/usr/local")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/bootloader")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,12 +34,12 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/home/letian/Desktop/software/esp32/esp-tools/tools/xtensa-esp32s3-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32s3-elf/bin/xtensa-esp32s3-elf-objdump")
+  set(CMAKE_OBJDUMP "D:/B_Code/espidf/esp32idf_cmd/Espressif/tools/xtensa-esp32s3-elf/esp-2021r2-patch5-8.4.0/xtensa-esp32s3-elf/bin/xtensa-esp32s3-elf-objdump.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/letian/Desktop/software/github/ESP32S3_Demo/web_location/build/bootloader/esp-idf/cmake_install.cmake")
+  include("D:/C_Github/ESP32S3_Demo/web_location/build/bootloader/esp-idf/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/letian/Desktop/software/github/ESP32S3_Demo/web_location/build/bootloader/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/C_Github/ESP32S3_Demo/web_location/build/bootloader/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
